@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { error } from 'console';
 
 @Injectable()
 export class AppService {
@@ -7,10 +8,12 @@ export class AppService {
 
   async getHello(visitorName: string, clientIp: string) {
       // Get location data based on IP
+      console.log(clientIp)
       const response = await axios.get(`http://ip-api.com/json/${clientIp}`);
       const { city } = response.data;
 
       if (!city) {
+        console.log(error)
         return { error: 'Could not determine the city from the IP address' };
       }
       // Get weather data based on city
