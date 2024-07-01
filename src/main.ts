@@ -4,11 +4,8 @@ import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-    // Trust the proxy
-    const expressApp = app.getHttpAdapter().getInstance();
-  
-    // Trust proxy
-    expressApp.set('trust proxy', true);
+  const expressApp = app.getHttpAdapter().getInstance();
+  expressApp.set('trust proxy', true);
   await app.listen(process.env.PORT || 3000, () =>
   console.log('Listening on port: ' + process.env.PORT)
 );

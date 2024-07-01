@@ -1,7 +1,6 @@
 import { Controller, Get, Query, Ip, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Request } from 'express';
-import { RealIP } from 'nestjs-real-ip';
 
 @Controller('api')
 export class AppController {
@@ -14,10 +13,5 @@ export class AppController {
     const clientIp  = request.ip
     console.log(clientIp)
     return await this.appService.getHello(visitorName, clientIp as string);
-  }
-
-  @Get('my-ip')
-  get(@RealIP() ip: string): string {
-    return ip;
   }
 }
