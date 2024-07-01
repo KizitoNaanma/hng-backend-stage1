@@ -8,7 +8,10 @@ export class AppController {
 
   @Get('hello')
   async getHello(@Query('visitor_name') visitorName: string, @Req() request: Request, @Ip() ip: string) {
-    const clientIp = request.socket.remoteAddress || request.headers['x-forwarded-for'] || ip;
+    // const clientIp = request.headers['x-forwarded-for'] || request.socket.remoteAddress || ip;
+    console.log({socket: request.socket.remoteAddress})
+    const clientIp  = request.ip
+    console.log(clientIp)
     return await this.appService.getHello(visitorName, clientIp as string);
   }
 }
